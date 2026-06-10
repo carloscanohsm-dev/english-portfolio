@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Carlos Cano | Futuristic English Portfolio | SENA ADSO</title>
+  
+  <!-- Font Awesome (respaldo) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    /* Video de fondo Cyberpunk */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+    
+    /* Capa oscura para legibilidad */
+    .dark-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+    
+    body {
+      font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+      color: #eef5ff;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+    
+    /* Partículas flotantes */
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+    
+    .particle {
+      position: fixed;
+      background: radial-gradient(circle, #0cf, transparent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      animation: float 15s infinite linear;
+    }
+    
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+    }
+    
+    /* Efecto Glassmorphism */
+    .glass-card {
+      background: rgba(12, 20, 45, 0.55);
+      backdrop-filter: blur(14px);
+      border-radius: 2rem;
+      border: 1px solid rgba(0, 255, 255, 0.35);
+      box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5);
+      transition: all 0.35s ease;
+    }
+    
+    .glass-card:hover {
+      border-color: #0cf;
+      box-shadow: 0 25px 45px -12px #0cf4;
+      transform: translateY(-5px);
+    }
+    
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: rgba(5, 12, 28, 0.85);
+      backdrop-filter: blur(16px);
+      padding: 0.8rem 2rem;
+      border-radius: 3rem;
+      border: 1px solid #1e3a6f;
+      margin-bottom: 2rem;
+    }
+    
+    .logo {
+      font-weight: 800;
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, #aaffff, #5f9eff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .logo span { color: #0cf; }
+    
+    /* Menú con iconos Cyberpunk */
+    .menu {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .menu a {
+      color: #c6e0ff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .menu a:hover {
+      color: white;
+      border-bottom-color: #0cf;
+      text-shadow: 0 0 6px #0cf;
+    }
+    
+    /* Estilo Cyberpunk para iconos */
+    .cyber-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      filter: drop-shadow(0 0 3px #0cf) drop-shadow(0 0 1px #0cf);
+      transition: all 0.2s ease;
+      vertical-align: middle;
+    }
+    
+    .menu a:hover .cyber-icon {
+      filter: drop-shadow(0 0 10px #0cf) brightness(1.3);
+      transform: scale(1.1);
+    }
+    
+    /* Efecto glitch al pasar el mouse */
+    @keyframes glitch {
+      0% { transform: skew(0deg); opacity: 1; filter: drop-shadow(0 0 3px #0cf); }
+      20% { transform: skew(3deg); opacity: 0.9; filter: drop-shadow(0 0 8px #f0f); }
+      40% { transform: skew(-3deg); opacity: 1; filter: drop-shadow(0 0 3px #0cf); }
+      100% { transform: skew(0deg); opacity: 1; }
+    }
+    
+    .menu a:hover .cyber-icon {
+      animation: glitch 0.3s ease-in-out;
+    }
+    
+    .translate-btn {
+      background: linear-gradient(95deg, #1a2a48, #0f1a30);
+      border: 1px solid #2a6a9a;
+      padding: 0.5rem 1.3rem;
+      border-radius: 2rem;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    
+    .translate-btn:hover {
+      background: #2a4a72;
+      box-shadow: 0 0 12px #0cf6;
+    }
+    
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      background: linear-gradient(145deg, #ffffff, #7bc5ff, #0cf);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 1rem 0;
+      animation: glow 3s infinite alternate;
+    }
+    
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #0cf; }
+      100% { text-shadow: 0 0 20px #0cf; }
+    }
+    
+    .subtitle {
+      color: #aac9ff;
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #0cf;
+      padding-left: 1rem;
+    }
+    
+    h2 {
+      font-size: 2.2rem;
+      margin: 2rem 0 1.2rem;
+      display: inline-block;
+      background: linear-gradient(90deg, #0cf, transparent);
+      padding-right: 1.8rem;
+      border-radius: 0 40px 0 0;
+    }
+    
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 2rem;
+      margin: 1.5rem 0;
+    }
+    
+    .evidence-card {
+      padding: 1.5rem;
+    }
+    
+    video, audio, iframe {
+      width: 100%;
+      border-radius: 1.2rem;
+      margin: 1rem 0;
+      background: #00000066;
+    }
+    
+    iframe {
+      aspect-ratio: 16/9;
+      border: none;
+    }
+    
+    .image-preview {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 1rem;
+      margin: 1rem 0;
+      border: 1px solid #0cf3;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    
+    .document-preview {
+      margin: 1rem 0;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #0a0f1a;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid #2a3a5a;
+    }
+    
+    .document-preview:hover {
+      border-color: #0cf;
+      box-shadow: 0 0 10px #0cf3;
+    }
+    
+    .preview-header {
+      background: #0f1a2a;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      color: #8ab3ff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .pdf-thumbnail {
+      width: 100%;
+      height: 150px;
+      background: #0f1a2a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .pdf-thumbnail i { font-size: 3rem; color: #ff4444; }
+    
+    .file-badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.5rem;
+      font-size: 0.7rem;
+      background: #0cf2;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.95);
+      backdrop-filter: blur(8px);
+    }
+    
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      margin-top: 3%;
+    }
+    
+    .modal-pdf {
+      width: 90%;
+      height: 90%;
+      margin: auto;
+      display: block;
+      margin-top: 3%;
+      border: none;
+      border-radius: 1rem;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    
+    .close-modal:hover { color: #0cf; }
+    
+    .text-preview {
+      background: #0a0f20cc;
+      padding: 1rem;
+      border-radius: 1rem;
+      font-size: 0.9rem;
+      margin-top: 0.8rem;
+      border-left: 3px solid #0cf;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    
+    .badge {
+      background: linear-gradient(135deg, #0cf3, #0cf1);
+      display: inline-block;
+      padding: 0.2rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 0.8rem;
+      border: 1px solid #0cf;
+      color: #d0f0ff;
+    }
+    
+    .badge i { margin-right: 6px; }
+    
+    .info-bar {
+      background: #07153070;
+      border-radius: 1rem;
+      padding: 0.8rem 1.5rem;
+      margin: 1rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.8rem;
+      font-size: 0.85rem;
+      border: 1px dashed #2f6f9f;
+    }
+    
+    .btn-download, .btn-view {
+      display: inline-block;
+      background: linear-gradient(135deg, #0cf2, #0cf1);
+      border: 1px solid #0cf;
+      border-radius: 2rem;
+      padding: 0.5rem 1rem;
+      margin-top: 0.8rem;
+      margin-right: 0.5rem;
+      color: white;
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    
+    .btn-download i, .btn-view i { margin-right: 5px; }
+    
+    .btn-download:hover, .btn-view:hover {
+      background: #0cf4;
+      transform: scale(1.02);
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 1.5rem;
+      border-top: 1px solid #1e3a6f;
+      font-size: 0.8rem;
+    }
+    
+    @media (max-width: 750px) {
+      .container { padding: 1rem; }
+      h1 { font-size: 2rem; }
+      .navbar { flex-direction: column; text-align: center; }
+      h2 { font-size: 1.6rem; }
+      .menu { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Video de fondo Cyberpunk -->
+<video class="video-background" autoplay loop muted playsinline>
+  <source src="videos/Cyberpunk02.mp4" type="video/mp4">
+  Tu navegador no soporta videos de fondo.
+</video>
+<div class="dark-overlay"></div>
+
+<div id="particles"></div>
+
+<div id="fileModal" class="modal">
+  <span class="close-modal">&times;</span>
+  <img class="modal-content" id="modalImage" style="display:none;">
+  <iframe class="modal-pdf" id="modalPdf" style="display:none;" frameborder="0"></iframe>
+</div>
+
+<div class="container">
+  <div class="navbar">
+    <div class="logo">✨ Carlos Cano · <span>English Evidence Hub</span> | ADSO</div>
+    <div class="menu">
+      <a href="#home" data-key="home">
+        <img src="imagenes/icono_home.png" class="cyber-icon" alt="Home">
+        <span class="menu-text">Home</span>
+      </a>
+      <a href="#videos" data-key="videos">
+        <img src="imagenes/icono_videos.png" class="cyber-icon" alt="Videos">
+        <span class="menu-text">Videos</span>
+      </a>
+      <a href="#audios" data-key="audios">
+        <img src="imagenes/icono_audios.png" class="cyber-icon" alt="Audios">
+        <span class="menu-text">Audios</span>
+      </a>
+      <a href="#images" data-key="images">
+        <img src="imagenes/icono_imagenes.png" class="cyber-icon" alt="Images">
+        <span class="menu-text">Images</span>
+      </a>
+      <a href="#texts" data-key="texts">
+        <img src="imagenes/icono_textos.png" class="cyber-icon" alt="Texts">
+        <span class="menu-text">Texts</span>
+      </a>
+      <a href="#documents" data-key="documents">
+        <img src="imagenes/icono_documentos.png" class="cyber-icon" alt="Documents">
+        <span class="menu-text">Documents</span>
+      </a>
+      <a href="#about" data-key="about">
+        <img src="imagenes/icono_about.png" class="cyber-icon" alt="About">
+        <span class="menu-text">About</span>
+      </a>
+    </div>
+    <button class="translate-btn" id="translateBtn">🌐 Español / English</button>
+  </div>
+
+  <div class="info-bar glass-card">
+    <span>🧑‍💻 <strong>Carlos Fernery Cano Ospina</strong></span>
+    <span>📚 Ficha: 3070118 | ADSO</span>
+    <span>📍 SENA Bolívar - Centro Agroempresarial y Minero, Cartagena</span>
+    <span>🎯 IE-GA4-240202501-AA1-EV03</span>
+  </div>
+
+  <section id="home">
+    <h1>🚀 My English Portfolio<br><span style="font-size:1.8rem;">Futuristic Evidence · Growth Mindset</span></h1>
+    <div class="subtitle">“Documenting my journey to become a bilingual software developer”</div>
+    <div class="glass-card editable-content" id="homeText"></div>
+  </section>
+
+  <section id="videos">
+    <h2 class="section-title" data-key-en="🎥 Video Evidences" data-key-es="🎥 Evidencias en Video">🎥 Video Evidences</h2>
+    <div id="videoGrid" class="evidence-grid"></div>
+  </section>
+
+  <section id="audios">
+    <h2 class="section-title" data-key-en="🎙️ Audio Evidences" data-key-es="🎙️ Evidencias en Audio">🎙️ Audio Evidences</h2>
+    <div id="audioGrid" class="evidence-grid"></div>
+  </section>
+
+  <section id="images">
+    <h2 class="section-title" data-key-en="🖼️ Image Evidences" data-key-es="🖼️ Evidencias en Imagen">🖼️ Image Evidences</h2>
+    <div id="imageGrid" class="evidence-grid"></div>
+  </section>
+
+  <section id="texts">
+    <h2 class="section-title" data-key-en="📝 Written Evidences" data-key-es="📝 Evidencias Escritas">📝 Written Evidences</h2>
+    <div id="textGrid" class="evidence-grid"></div>
+  </section>
+
+  <section id="documents">
+    <h2 class="section-title" data-key-en="📄 Downloadable Documents" data-key-es="📄 Documentos Descargables">📄 Downloadable Documents</h2>
+    <div id="documentsGrid" class="evidence-grid"></div>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title" data-key-en="🧠 About me - My purpose" data-key-es="🧠 Sobre mí - Mi propósito">🧠 About me - My purpose</h2>
+    <div class="glass-card editable-content" id="aboutText"></div>
+  </section>
+
+  <footer>
+    <p>🔮 Carlos Fernery Cano Ospina - Ficha 3070118 | SENA Centro Agroempresarial Cartagena | IE-GA4-240202501-AA1-EV03</p>
+    <p>✨ “Learning English step by step, evidence by evidence” ✨</p>
+  </footer>
+</div>
+
+<script>
+  // ============================================================
+  // FUNCIÓN PARA CODIFICAR RUTAS
+  // ============================================================
+  function encodeFilePath(path) {
+    const parts = path.split('/');
+    const encodedParts = parts.map(part => encodeURIComponent(part));
+    return encodedParts.join('/');
+  }
+
+  // ============================================================
+  // FUNCIONES PARA VIDEOS
+  // ============================================================
+  function getYouTubeEmbedUrl(url) {
+    const patterns = [/youtu\.be\/([^?&]+)/, /youtube\.com\/watch\?v=([^&]+)/, /youtube\.com\/embed\/([^?&]+)/];
+    for (let pattern of patterns) { const match = url.match(pattern); if (match) return `https://www.youtube.com/embed/${match[1]}`; }
+    return url;
+  }
+  function getGoogleDriveVideoEmbedUrl(url) { const match = url.match(/\/d\/([^\/]+)/); if (match) return `https://drive.google.com/file/d/${match[1]}/preview`; return url; }
+
+  // ============================================================
+  // TUS EVIDENCIAS
+  // ============================================================
+  
+  const videos = [
+    { name: "Video Presentación - GA1", code: "GA1-240202501-AA1-EV02", desc: "Video de presentación personal en inglés", url: "https://youtu.be/HqmJMdcCICg" },
+    { name: "Video Entrevista Virtual - GA2", code: "GA2-240202501-AA1-EV02", desc: "Entrevista virtual simulada en inglés", url: "https://drive.google.com/file/d/1RgBD7UFSqMCZzJNVrUlqxdSgMZDP2BeK/view?usp=sharing" },
+    { name: "Tourist Places in Risaralda - GA2", code: "GA2-240202501-AA2-EV02", desc: "Presentación sobre lugares turísticos en Risaralda", url: "https://youtu.be/UYsUrNNbeqg" }
+  ];
+  
+  const audios = [
+    { name: "Audio GA3 - Rutina Diaria", code: "GA3-240202501-AA1-EV02", desc: "Mi rutina diaria en inglés", file: encodeFilePath("evidencias/audios/IE-GA3-240202501-AA1-EV02/Audio GA3-240202501-AA1-EV02.mp3") },
+    { name: "Audio GA3 - Situaciones Futuras", code: "GA3-240202501-AA2-EV02", desc: "Situaciones y planes a futuro", file: encodeFilePath("evidencias/audios/IE-GA3-240202501-AA2-EV02/Audio GA3-240202501-AA2-EV02.mp3") }
+  ];
+  
+  const imagenes = [];
+  
+  const textos = [
+    { name: "Reflexión de Aprendizaje", code: "IE-GA4-240202501-AA1-EV02", content: "Escribe aquí tu reflexión completa en inglés sobre tu progreso en el aprendizaje del idioma. Describe tus logros, dificultades superadas y metas futuras para alcanzar el nivel B2 en inglés." }
+  ];
+  
+  const documentos = [
+    { name: "Folleto Following My Passions", code: "GA1-240202501-AA1-EV03", desc: "Folleto informativo - Following My Passions, Finding My Way", file: encodeFilePath("evidencias/documentos/IE-GA1-240202501-AA1-EV03/Folleto Following My Passions, Finding My Way - GA1-240202501-AA1-EV03.pdf"), type: "pdf", icon: "fa-file-pdf" },
+    { name: "Folleto GA1", code: "GA1-240202501-AA1-EV03", desc: "Folleto adicional", file: encodeFilePath("evidencias/documentos/IE-GA1-240202501-AA1-EV03/Folleto - GA1-240202501-AA1-EV03.pdf"), type: "pdf", icon: "fa-file-pdf" },
+    { name: "Chronicle GA2", code: "GA2-240202501-AA1-EV03", desc: "Crónica en inglés", file: encodeFilePath("evidencias/documentos/IE-GA2-240202501-AA1-EV03/Chronicle GA2-240202501-AA1-EV03.pdf"), type: "pdf", icon: "fa-file-pdf" },
+    { name: "Participación en Foro - GA3", code: "IE-GA3-240202501-AA1-EV03", desc: "Participación en el foro", file: encodeFilePath("evidencias/documentos/IE-GA3-240202501-AA1-EV03/Participacion Foro  -IE-GA3-240202501-AA1-EV03.pdf"), type: "pdf", icon: "fa-file-pdf" },
+    { name: "Mapa Mental PLE", code: "GA4-240202501-AA1-EV02", desc: "Personal Learning Environment - Mapa mental", file: encodeFilePath("evidencias/documentos/IE-GA4-240202501-AA1-EV02/Mapa mental sobre su Personal Learning Environment PLE GA4-24020.pdf"), type: "pdf", icon: "fa-file-pdf" }
+  ];
+
+  // ============================================================
+  // TRADUCCIONES
+  // ============================================================
+  const translations = {
+    en: { homeContent: "<p><strong>✨ Welcome to my futuristic portfolio!</strong> I'm Carlos Fernery Cano Ospina, an ADSO apprentice at SENA Cartagena. This space contains all my English learning evidences: <strong>videos, audio recordings, written reflections and downloadable documents</strong>.</p><p>💡 Feel free to explore each section. Your feedback is always welcome!</p>", aboutContent: "<p>👋 <strong>Hi, I'm Carlos</strong>, a tech enthusiast from Cartagena. I started learning English to <strong>improve my programming career</strong>.</p><p>🎯 <strong>My objectives for 2026:</strong></p><ul><li>Reach B2 English level</li><li>Create software documentation in English</li><li>Work on international projects</li></ul><p>🤝 Thank you for visiting!</p>" },
+    es: { homeContent: "<p><strong>✨ ¡Bienvenido a mi portafolio futurista!</strong> Soy Carlos Fernery Cano Ospina, aprendiz de ADSO en el SENA Cartagena. Este espacio contiene todas mis evidencias de aprendizaje de inglés: <strong>videos, grabaciones de audio, reflexiones escritas y documentos descargables</strong>.</p><p>💡 Siéntete libre de explorar cada sección. ¡Tu retroalimentación siempre es bienvenida!</p>", aboutContent: "<p>👋 <strong>Hola, soy Carlos</strong>, un entusiasta de la tecnología de Cartagena. Empecé a aprender inglés para <strong>mejorar mi carrera en programación</strong>.</p><p>🎯 <strong>Mis objetivos para 2026:</strong></p><ul><li>Alcanzar nivel B2 de inglés</li><li>Crear documentación de software en inglés</li><li>Trabajar en proyectos internacionales</li></ul><p>🤝 ¡Gracias por visitar!</p>" }
+  };
+
+  // ============================================================
+  // RENDERIZADO
+  // ============================================================
+  function renderVideos() {
+    const container = document.getElementById('videoGrid');
+    if (!container) return;
+    container.innerHTML = '';
+    if (videos.length === 0) { container.innerHTML = '<div class="glass-card" style="padding:2rem; text-align:center;"><i class="fas fa-video" style="font-size:2rem;"></i><br><strong>No videos added yet</strong></div>'; return; }
+    videos.forEach(v => {
+      let embedHtml = '';
+      if (v.url.includes('youtube.com') || v.url.includes('youtu.be')) embedHtml = `<iframe src="${getYouTubeEmbedUrl(v.url)}" frameborder="0" allowfullscreen></iframe>`;
+      else if (v.url.includes('drive.google.com')) embedHtml = `<iframe src="${getGoogleDriveVideoEmbedUrl(v.url)}" frameborder="0" allowfullscreen></iframe>`;
+      else embedHtml = `<video controls src="${v.url}"></video>`;
+      const card = document.createElement('div'); card.className = 'evidence-card glass-card';
+      card.innerHTML = `<div class="badge"><i class="fas fa-video"></i> ${v.code}</div><h3>${v.name}</h3>${embedHtml}<p>${v.desc || ''}</p>`;
+      container.appendChild(card);
+    });
+  }
+
+  function renderAudios() {
+    const container = document.getElementById('audioGrid');
+    if (!container) return;
+    container.innerHTML = '';
+    if (audios.length === 0) { container.innerHTML = '<div class="glass-card" style="padding:2rem; text-align:center;"><i class="fas fa-headphones" style="font-size:2rem;"></i><br><strong>No audios added yet</strong></div>'; return; }
+    audios.forEach(a => {
+      const card = document.createElement('div'); card.className = 'evidence-card glass-card';
+      card.innerHTML = `<div class="badge"><i class="fas fa-microphone-alt"></i> ${a.code}</div><h3>${a.name}</h3><audio controls src="${a.file}"></audio><p>${a.desc || ''}</p>`;
+      container.appendChild(card);
+    });
+  }
+
+  function renderImages() {
+    const container = document.getElementById('imageGrid');
+    if (!container) return;
+    container.innerHTML = '';
+    if (imagenes.length === 0) { container.innerHTML = '<div class="glass-card" style="padding:2rem; text-align:center;"><i class="fas fa-images" style="font-size:2rem;"></i><br><strong>No images added yet</strong><br><br>Las evidencias en imagen están en la sección de documentos como PDF.</div>'; return; }
+    imagenes.forEach(img => {
+      const card = document.createElement('div'); card.className = 'evidence-card glass-card';
+      card.innerHTML = `<div class="badge"><i class="fas fa-image"></i> ${img.code}</div><h3>${img.name}</h3><img src="${img.file}" class="image-preview" alt="${img.name}" onclick="openFile('${img.file}', 'image')"><p>${img.desc || ''}</p>`;
+      container.appendChild(card);
+    });
+  }
+
+  function renderTexts() {
+    const container = document.getElementById('textGrid');
+    if (!container) return;
+    container.innerHTML = '';
+    if (textos.length === 0) { container.innerHTML = '<div class="glass-card" style="padding:2rem; text-align:center;"><i class="fas fa-file-alt" style="font-size:2rem;"></i><br><strong>No written texts added yet</strong></div>'; return; }
+    textos.forEach(t => {
+      const card = document.createElement('div'); card.className = 'evidence-card glass-card';
+      const preview = t.content.substring(0, 200);
+      card.innerHTML = `<div class="badge"><i class="fas fa-pen-fancy"></i> ${t.code}</div><h3>${t.name}</h3><div class="text-preview">${preview}${t.content.length > 200 ? '…' : ''}</div><details><summary>📖 Read full text</summary><div style="margin-top:0.8rem;">${t.content}</div></details>`;
+      container.appendChild(card);
+    });
+  }
+
+  function renderDocuments() {
+    const container = document.getElementById('documentsGrid');
+    if (!container) return;
+    container.innerHTML = '';
+    if (documentos.length === 0) { container.innerHTML = '<div class="glass-card" style="padding:2rem; text-align:center;"><i class="fas fa-folder-open" style="font-size:2rem;"></i><br><strong>No documents added yet</strong></div>'; return; }
+    documentos.forEach(d => {
+      const card = document.createElement('div'); card.className = 'evidence-card glass-card';
+      card.innerHTML = `
+        <div class="badge"><i class="fas ${d.icon || 'fa-file-pdf'}"></i> ${d.code}</div>
+        <h3>${d.name}</h3>
+        <p>${d.desc || ''}</p>
+        <div class="document-preview" onclick="openFile('${d.file}', 'pdf')">
+          <div class="preview-header"><span><i class="fas ${d.icon || 'fa-file-pdf'}"></i> ${d.name}</span><span class="file-badge">PDF</span></div>
+          <div class="pdf-thumbnail"><i class="fas fa-file-pdf"></i><span style="font-size:0.7rem;">Click to preview</span></div>
+        </div>
+        <div><a href="${d.file}" class="btn-download" download><i class="fas fa-download"></i> Download</a><button class="btn-view" onclick="openFile('${d.file}', 'pdf')"><i class="fas fa-eye"></i> View</button></div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // ============================================================
+  // MODAL
+  // ============================================================
+  window.openFile = function(filePath, fileType) {
+    const modal = document.getElementById('fileModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalPdf = document.getElementById('modalPdf');
+    if (fileType === 'pdf') {
+      modalImage.style.display = 'none';
+      modalPdf.style.display = 'block';
+      modalPdf.src = filePath;
+    } else if (fileType === 'image') {
+      modalPdf.style.display = 'none';
+      modalImage.style.display = 'block';
+      modalImage.src = filePath;
+    }
+    modal.style.display = "block";
+  }
+  function closeModal() { const modal = document.getElementById('fileModal'); const modalPdf = document.getElementById('modalPdf'); modal.style.display = "none"; modalPdf.src = ""; }
+  document.querySelector('.close-modal')?.addEventListener('click', closeModal);
+  window.onclick = function(event) { if (event.target === document.getElementById('fileModal')) closeModal(); }
+
+  // ============================================================
+  // TRADUCCIÓN
+  // ============================================================
+  let currentLang = 'en';
+  const btn = document.getElementById('translateBtn');
+  function updateLanguage(lang) {
+    const menuMap = { home: lang === 'en' ? 'Home' : 'Inicio', videos: lang === 'en' ? 'Videos' : 'Videos', audios: lang === 'en' ? 'Audios' : 'Audios', images: lang === 'en' ? 'Images' : 'Imágenes', texts: lang === 'en' ? 'Texts' : 'Textos', documents: lang === 'en' ? 'Documents' : 'Documentos', about: lang === 'en' ? 'About' : 'Sobre mí' };
+    document.querySelectorAll('.menu a').forEach(link => { const key = link.getAttribute('href').substring(1); if (menuMap[key]) { const span = link.querySelector('.menu-text'); if (span) span.textContent = menuMap[key]; } });
+    document.querySelectorAll('.section-title').forEach(title => { const enText = title.getAttribute('data-key-en'); const esText = title.getAttribute('data-key-es'); if (enText && esText) title.innerHTML = lang === 'en' ? enText : esText; });
+    document.getElementById('homeText').innerHTML = translations[lang].homeContent;
+    document.getElementById('aboutText').innerHTML = translations[lang].aboutContent;
+    btn.innerHTML = lang === 'en' ? '🌐 Español / English' : '🇬🇧 English / Español';
+  }
+  btn.addEventListener('click', () => { currentLang = currentLang === 'en' ? 'es' : 'en'; updateLanguage(currentLang); });
+  renderVideos(); renderAudios(); renderImages(); renderTexts(); renderDocuments(); updateLanguage('en');
+
+  function createParticles() { const container = document.getElementById('particles'); if (!container) return; for (let i = 0; i < 50; i++) { const particle = document.createElement('div'); particle.classList.add('particle'); const size = Math.random() * 4 + 1; particle.style.width = `${size}px`; particle.style.height = `${size}px`; particle.style.left = `${Math.random() * 100}%`; particle.style.top = `${Math.random() * 100}%`; particle.style.animationDelay = `${Math.random() * 20}s`; particle.style.animationDuration = `${Math.random() * 15 + 8}s`; container.appendChild(particle); } }
+  createParticles();
+</script>
+</body>
+</html>
